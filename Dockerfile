@@ -1,6 +1,6 @@
 FROM alpine:latest
 RUN apk update && apk upgrade
-RUN apk add openjdk8-jre wget
+RUN apk add openjdk8-jre curl
 RUN mkdir /opt/minecraft
 ADD https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar \
   /opt/minecraft/server.jar
@@ -14,6 +14,7 @@ RUN chown -R minecraft:minecraft /opt/minecraft
 RUN rm -rf /var/cache/apk/*
 
 ENV JRE_HEAP=1024M
+ENV MINECRAFT_MAP_URL=
 
 HEALTHCHECK --interval=10s --timeout=10s --start-period=1m \
   CMD nc -z localhost 25565 
