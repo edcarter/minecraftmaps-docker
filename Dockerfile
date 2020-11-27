@@ -13,6 +13,8 @@ RUN chown -R minecraft:minecraft /opt/minecraft
 
 RUN rm -rf /var/cache/apk/*
 
+ENV JRE_HEAP=1024M
+
 HEALTHCHECK --interval=10s --timeout=10s --start-period=1m \
   CMD nc -z localhost 25565 
 
