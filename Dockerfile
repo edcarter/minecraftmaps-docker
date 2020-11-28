@@ -25,5 +25,5 @@ HEALTHCHECK --interval=10s --timeout=10s --start-period=1m \
 
 VOLUME /opt/minecraft
 EXPOSE 25565/tcp
-STOPSIGNAL SIGINT
-CMD /opt/minecraft/entrypoint.sh
+STOPSIGNAL SIGTERM
+CMD ["/opt/minecraft/entrypoint.sh"]

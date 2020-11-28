@@ -35,4 +35,4 @@ if [ ! -d "world" ]; then
         rm -f world.zip
     fi
 fi
-java -Xmx${JRE_HEAP} -Xms${JRE_HEAP} -jar server.jar nogui
+exec java -Xmx${JRE_HEAP} -Xms${JRE_HEAP} -jar server.jar nogui
