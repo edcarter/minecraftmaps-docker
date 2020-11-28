@@ -11,7 +11,18 @@ if [ ! -d "world" ]; then
         # provided a MINECRAFT_MAP_URL. We assume that
         # the MINECRAFT_MAP_URL points to a minecraftmaps.com
         # page for a specific minecraft map.
-        curl ${MINECRAFT_MAP_URL} --output world.zip
+
+        # First lets assume the MINECRAFT_MAP_URL is for the main page
+        # of the map, in that case we just need to append /download to
+        # the URL to get the zip.
+        curl ${MINECRAFT_MAP_URL}/download --output world.zip || true
+        if [ ! -s "world.zip" ]; then
+            # If the first download failed produces an empty file the
+            # download failed. Maybe the user provided a direct link
+            # to the download, lets try that.
+            curl ${MINECRAFT_MAP_URL} --output world.zip
+        fi
+   
         mkdir world
         unzip world.zip -o -d world
 
