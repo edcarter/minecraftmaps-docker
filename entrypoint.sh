@@ -32,6 +32,7 @@ if [ ! -d "world" ]; then
         # We don't know the name of the unextracted directory
         # so we simply do a wildcard replace
         mv world/*/* world/.
-        fi
+        rm -f world.zip
+    fi
 fi
 java -Xmx${JRE_HEAP} -Xms${JRE_HEAP} -jar server.jar nogui
