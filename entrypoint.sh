@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Print each command run and exit on non-zero exit code of subcommands.
+# Some people don't like -e: http://mywiki.wooledge.org/BashFAQ/105
+set -ex
+
 cd /opt/minecraft
 if [ ! -d "world" ]; then
     if [ ! -z "${MINECRAFT_MAP_URL}" ]; then
