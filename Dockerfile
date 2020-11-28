@@ -11,8 +11,9 @@ RUN addgroup minecraft
 RUN adduser -h /opt/minecraft -G minecraft -D minecraft
 RUN chown -R minecraft:minecraft /opt/minecraft
 
-ADD --chown=minecraft:minecraft https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar \
-  /opt/minecraft/server.jar
+USER minecraft:minecraft
+RUN curl https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar \
+  --output /opt/minecraft/server.jar
 ADD --chown=minecraft:minecraft entrypoint.sh /opt/minecraft/entrypoint.sh
 ADD --chown=minecraft:minecraft eula.txt /opt/minecraft/eula.txt
 
@@ -25,5 +26,4 @@ HEALTHCHECK --interval=10s --timeout=10s --start-period=1m \
 VOLUME /opt/minecraft
 EXPOSE 25565/tcp
 STOPSIGNAL SIGINT
-USER minecraft:minecraft
 CMD /opt/minecraft/entrypoint.sh
